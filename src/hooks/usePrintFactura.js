@@ -9,6 +9,7 @@ export const usePrintFactura = ({
   cierre,
   dinero,
   cliente,
+  domicilio = false,
 }) => {
   const doc = new jsPDF({
     unit: "mm",
@@ -153,10 +154,13 @@ export const usePrintFactura = ({
     salto += 3;
   };
   const comanda = () => {
-    doc.setFontSize(8);
-
+    salto = 12;
     setTheTotal();
     const date = new Date(Date.now());
+    doc.setFontSize(12)
+    domicilio && imprimir("=======Domicilio=======");
+    doc.setFontSize(8);
+    
     imprimir(`Turno: ${getTurno(date.getHours())}`);
     imprimir(
       `Fecha: ${date.getDate()}/${
@@ -217,6 +221,8 @@ export const usePrintFactura = ({
       );
     });
     imprimirLinea();
+    domicilio && imprimir("Domicilio");
+    imprimirLinea()
     doc.save(
       `./${date.getFullYear()}/${
         monthNames[date.getMonth()]

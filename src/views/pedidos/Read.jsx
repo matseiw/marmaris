@@ -59,7 +59,7 @@ const Read = ({ getMesasDisponibles }) => {
         ))}
         <Grid item xs={12}>
           {mesasLibres.map((mesa) => (
-            <>{!mesa.idemesa && <Domicilios factura={mesa} />}</>
+            <>{<Domicilios factura={mesa} />}</>
           ))}
         </Grid>
       </Grid>
