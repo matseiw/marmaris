@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export const usePedido = () => {
+  /* eslint-disable no-unused-vars */
   const [state, dispatch] = useReducer(reducer, initialState);
   const updatePedido = async (id, { contraseña, nombreUsuario }) => {
     contraseña = contraseña.length !== 0 && md5(contraseña);
@@ -23,5 +24,5 @@ export const usePedido = () => {
     );
     return respuesta;
   };
-  return [state, updatePedido];
+  return [updatePedido];
 };

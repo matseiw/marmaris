@@ -51,8 +51,6 @@ function Mesa({ addDomicilio, setClose }) {
   const { user } = useSelector((state) => state.auth);
   const usuario = useSelector((state) => state.user.user);
   const classes = useStyles();
-  const [productoSeleccionado, setProductoSeleccionado] = useState();
-  const [clienteSeleccionado, setClienteSeleccionado] = useState();
   const { msg, open } = useSelector((state) => state.alert);
 
   useEffect(() => {
@@ -81,7 +79,7 @@ function Mesa({ addDomicilio, setClose }) {
         ? alert("la cantidad minima es de 0")
         : addDomicilio(factura, pedidos);
       !open && handleOpen();
-    }else alert('El efectivo con el que cancela no puede ser menor al total')
+    } else alert('El efectivo con el que cancela no puede ser menor al total')
   };
 
   const handleAutoComplete = (value) => {
@@ -105,6 +103,7 @@ function Mesa({ addDomicilio, setClose }) {
   };
 
   const handleAutoCompleteCliente = (value) => {
+    
     if (value) {
       setFactura({
         ...factura,
@@ -164,31 +163,21 @@ function Mesa({ addDomicilio, setClose }) {
                 }}
                 options={usuario.filter((usu) => usu.cargo === 4)}
                 getOptionLabel={(option) => option.nombre}
-                inputValue={clienteSeleccionado}
-                onInputChange={(event, newInputValues) => {
-                  setClienteSeleccionado({
-                    nombre: newInputValues,
-                  });
-                }}
+                
                 style={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField {...params} label="Cliente" variant="outlined" />
                 )}
               />
               <Autocomplete
-                id="combo-box-demo"
                 value={productos}
                 onChange={(event, newValue) => {
                   handleAutoComplete(newValue);
                 }}
                 options={productos}
                 getOptionLabel={(option) => option.nombre}
-                inputValue={productoSeleccionado}
-                onInputChange={(event, newInputValues) => {
-                  setProductoSeleccionado({
-                    nombre: newInputValues,
-                  });
-                }}
+                defaultValue={productos[0]}
+               
                 style={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField {...params} label="Producto" variant="outlined" />

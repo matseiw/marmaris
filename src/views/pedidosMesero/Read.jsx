@@ -19,7 +19,8 @@ const Read = ({ getMesasDisponibles }) => {
         getMesasDisponibles(key);
       }, 10000);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <Grid container spacing={2}>

@@ -36,7 +36,7 @@ const ListaPlatos = ({ updatePrecios, setValor }) => {
 
   useEffect(() => {
     setValor();
-  }, []);
+  }, [setValor]);
 
   const [producto, setProducto] = useState([]);
 

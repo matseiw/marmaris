@@ -41,7 +41,6 @@ function Mesa({ mesa, addPedido, setClose }) {
   const { productos } = useSelector((state) => state.productos);
   const { user } = useSelector((state) => state.auth);
   const classes = useStyles();
-  const [productoSeleccionado, setProductoSeleccionado] = useState();
 
   const { msg, open } = useSelector((state) => state.alert);
 
@@ -139,12 +138,6 @@ function Mesa({ mesa, addPedido, setClose }) {
               }}
               options={productos}
               getOptionLabel={(option) => option.nombre}
-              inputValue={productoSeleccionado}
-              onInputChange={(event, newInputValues) => {
-                setProductoSeleccionado({
-                  nombre: newInputValues,
-                });
-              }}
               style={{ width: 300 }}
               renderInput={(params) => (
                 <TextField {...params} label="Combo box" variant="outlined" />

@@ -1,4 +1,3 @@
-import { usePrintFactura } from "hooks/usePrintFactura";
 import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -19,7 +18,7 @@ import {
 import CardBody from "components/Card/CardBody";
 import { FormError } from "components/Modal/FormError";
 import { setClose, setClear } from "actions/alertAction";
-import { Cambio } from "components/Modal/Cambio";
+
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -46,7 +45,7 @@ function Mesa({ factura, updatePedido, facturar, setClose }) {
   const { user } = useSelector((state) => state.user);
   const [productoSeleccionado, setProductoSeleccionado] = useState();
 
-  const meseroInfo = user.filter((u) => u.idusuario === factura.idmesero);
+
 
   const { msg, open } = useSelector((state) => state.alert);
   useEffect(() => {

@@ -21,7 +21,8 @@ const Read = ({ getMesasDisponibles }) => {
         getMesasDisponibles();
       }, 10000);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -46,15 +47,15 @@ const Read = ({ getMesasDisponibles }) => {
                 </CardFooter>
               </Card>
             ) : (
-              <Card>
-                <CardHeader title={m.nombre} subheader="disponible" />
-                <img src={mesaLogo} alt="mesa" />
+                <Card>
+                  <CardHeader title={m.nombre} subheader="disponible" />
+                  <img src={mesaLogo} alt="mesa" />
 
-                <CardFooter>
-                  <NuevoPedido mesa={m}>Agregar Pedido</NuevoPedido>
-                </CardFooter>
-              </Card>
-            )}
+                  <CardFooter>
+                    <NuevoPedido mesa={m}>Agregar Pedido</NuevoPedido>
+                  </CardFooter>
+                </Card>
+              )}
           </Grid>
         ))}
         <Grid item xs={12}>

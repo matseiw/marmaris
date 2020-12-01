@@ -37,7 +37,7 @@ export const Domicilios = ({ factura }) => {
       (cuerpo) => (total += cuerpo.cantidad * cuerpo.precio)
     );
     setTotal(total);
-  }, []);
+  }, [factura.cuerpo]);
   return (
     <>
       {factura.idmesa === null && (

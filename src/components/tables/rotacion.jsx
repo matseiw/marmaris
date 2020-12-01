@@ -107,13 +107,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
   title: {
     flex: "1 1 100%",
   },
@@ -139,15 +139,15 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          className={classes.title}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Nutrition
-        </Typography>
-      )}
+          <Typography
+            className={classes.title}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            Nutrition
+          </Typography>
+        )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -156,12 +156,12 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+          <Tooltip title="Filter list">
+            <IconButton aria-label="filter list">
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+        )}
     </Toolbar>
   );
 };
@@ -192,9 +192,9 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
-  dateSearch:{
-    display:'flex',
-    justifyContent:'space-around'
+  dateSearch: {
+    display: 'flex',
+    justifyContent: 'space-around'
   }
 }));
 
@@ -215,8 +215,23 @@ export default function EnhancedTable() {
 
   const url = `http://${window.location.hostname}:5000/`;
 
+  const getData = async () => {
+    const res = await fetch(`${url}rotacion`, {
+      body: JSON.stringify({ inicial, final }),
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+    setRows(data);
+  };
+
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [rows, setRows] = useState([]);
@@ -236,19 +251,6 @@ export default function EnhancedTable() {
     )
   );
 
-  const getData = async () => {
-    const res = await fetch(`${url}rotacion`, {
-      body: JSON.stringify({ inicial, final }),
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-    setRows(data);
-  };
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {

@@ -1,13 +1,12 @@
 import { Button, makeStyles, Modal, Paper, TextField } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { useModal } from "hooks/useModal";
-import React, { useState } from "react";
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { usePedido } from "hooks/useFicha";
 const useStyles = makeStyles({
   root: {
-    alignItems: "center",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -30,7 +29,7 @@ export const FacturarDomicilio = ({ factura, print }) => {
   const [open, handleOpen] = useModal(false);
   const { nombreUsuario } = useSelector((state) => state.auth.user);
   const { control, handleSubmit, errors } = useForm();
-  const [state, update] = usePedido();
+  const [update] = usePedido();
 
   const onSubmit = (data) => {
     update(factura.idfactura, {
