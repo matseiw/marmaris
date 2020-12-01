@@ -8,15 +8,15 @@ import NuevoPedido from "./NuevoPedido";
 
 const Read = ({ getMesasDisponibles }) => {
   const { mesa, mesasLibres } = useSelector((state) => state.mesa);
-  const { key } = useSelector((state) => state.auth);
+  
   const [start, setStart] = useState(true);
   useEffect(() => {
     if (start === true) {
-      getMesasDisponibles(key);
+      getMesasDisponibles();
       setStart(false);
     } else {
       setTimeout(() => {
-        getMesasDisponibles(key);
+        getMesasDisponibles();
       }, 10000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

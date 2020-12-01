@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import mesaLogo from "assets/img/Table-02.png";
 import { CardHeader, Card, Grid } from "@material-ui/core";
@@ -12,18 +12,21 @@ import { Domicilios } from "./Domicilios";
 const Read = ({ getMesasDisponibles }) => {
   const { mesa, mesasLibres } = useSelector((state) => state.mesa);
   const [start, setStart] = useState(true);
-  useEffect(() => {
+
+  const getEffect = () => {
     if (start === true) {
       getMesasDisponibles();
       setStart(false);
     } else {
       setTimeout(() => {
         getMesasDisponibles();
-      }, 10000);
+      }, 5000);
     }
+  }
+  useEffect(() => {
+    getEffect()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  });
   return (
     <>
       <NuevoDomicilio />
