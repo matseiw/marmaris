@@ -238,7 +238,16 @@ function Mesa({ factura, updatePedido, facturar, setClose, mesa }) {
                               }
                             />
                           </TableCell>
-                          <TableCell>{pedido.precio}</TableCell>
+                          <TableCell>
+                            <TextField
+                              type='number'
+                              value={pedido.precio}
+                              name='precio'
+                              onChange={(e) =>
+                                handleChange(e, pedido.idproducto)}
+                            />
+
+                          </TableCell>
                           <TableCell>
                             <TextField
                               type="text"

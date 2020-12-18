@@ -18,6 +18,7 @@ import {
 import CardBody from "components/Card/CardBody";
 import { FormError } from "components/Modal/FormError";
 import { setClose } from "actions/alertAction";
+import { blue } from "@material-ui/core/colors";
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -44,6 +45,12 @@ const useStyles = makeStyles({
       border: "red solid 2px",
     },
   },
+  button: {
+    display: 'block',
+    marginBottom: '10px',
+    background: blue[500],
+    width: '100%'
+  }
 });
 
 function Mesa({ addDomicilio, setClose }) {
@@ -80,6 +87,7 @@ function Mesa({ addDomicilio, setClose }) {
         : addDomicilio(factura, pedidos);
       !open && handleOpen();
     } else alert('El efectivo con el que cancela no puede ser menor al total')
+    console.log(msg);
   };
 
   const handleAutoComplete = (value) => {
@@ -103,12 +111,13 @@ function Mesa({ addDomicilio, setClose }) {
   };
 
   const handleAutoCompleteCliente = (value) => {
-    
+
     if (value) {
       setFactura({
         ...factura,
         idcliente: value.idusuario,
         nombre: value.idusuario !== 12 ? value.nombre : "",
+        telefono: value.telefono,
         direccion: value.direccion,
       });
     }
@@ -143,11 +152,13 @@ function Mesa({ addDomicilio, setClose }) {
 
   const handleOpen = () => {
     setOpenModal(!openModal);
+    setPedidos([]);
+    // setFactura([]);
   };
   return (
     <>
       <FormError open={open} msg={msg} handleOpen={setClose} />
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+      <Button className={classes.button} variant="contained" color="secondary" onClick={handleOpen}>
         Agregar Domicilio
       </Button>
       <Modal className={classes.root} open={openModal} onClose={handleOpen}>
@@ -156,14 +167,13 @@ function Mesa({ addDomicilio, setClose }) {
           <CardBody>
             <div className={classes.options}>
               <Autocomplete
-                id="combo-box-demo"
                 value={usuario}
                 onChange={(event, newValue) => {
                   handleAutoCompleteCliente(newValue);
                 }}
                 options={usuario.filter((usu) => usu.cargo === 4)}
-                getOptionLabel={(option) => option.nombre}
-                
+                getOptionLabel={(option) => option.telefono !== null ? option.telefono : 'Cliente anonimo'}
+                noOptionsText='Nuevo cliente'
                 style={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField {...params} label="Cliente" variant="outlined" />
@@ -176,8 +186,8 @@ function Mesa({ addDomicilio, setClose }) {
                 }}
                 options={productos}
                 getOptionLabel={(option) => option.nombre}
-                defaultValue={productos[0]}
-               
+
+
                 style={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField {...params} label="Producto" variant="outlined" />
@@ -254,7 +264,16 @@ function Mesa({ addDomicilio, setClose }) {
                               }
                             />
                           </TableCell>
-                          <TableCell>{pedido.precio}</TableCell>
+                          <TableCell>
+                            <TextField
+                              type='number'
+                              value={pedido.precio}
+                              name='precio'
+                              onChange={(e) =>
+                                handleChange(e, pedido.idproducto)}
+                            />
+
+                          </TableCell>
                           <TableCell>
                             <TextField
                               type="text"

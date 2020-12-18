@@ -119,6 +119,7 @@ function Mesa({ mesa, addPedido, setClose }) {
 
   const handleOpen = () => {
     setOpenModal(!openModal);
+    setPedidos([])
   };
   return (
     <>
@@ -177,7 +178,16 @@ function Mesa({ mesa, addPedido, setClose }) {
                               }
                             />
                           </TableCell>
-                          <TableCell>{pedido.precio}</TableCell>
+                          <TableCell>
+                            <TextField
+                              type='number'
+                              value={pedido.precio}
+                              name='precio'
+                              onChange={(e) =>
+                                handleChange(e, pedido.idproducto)}
+                            />
+
+                          </TableCell>
                           <TableCell>
                             <TextField
                               type="text"
